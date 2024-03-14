@@ -1,0 +1,15 @@
+.container {
+  @apply min-h-screen flex justify-center items-center bg-gray-100;
+}
+
+.form {
+  @apply bg-white shadow-md rounded p-8 max-w-lg w-full;
+
+  .MuiFormControl-root {
+    @apply w-full;
+  }
+
+  .MuiButton-root {
+    @apply w-full;
+  }
+}

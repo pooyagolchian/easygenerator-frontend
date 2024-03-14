@@ -2,3 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+
+body {
+  background: #f1f1f1;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}

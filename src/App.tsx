@@ -1,12 +1,15 @@
-import React from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import { Route, Routes, Navigate } from 'react-router-dom'
+import LoginPage from './Pages/LoginPage'
 
-function App() {
+const App = () => {
     return (
         <div>
+            <Routes>
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/" element={<Navigate replace to="/login" />} />
+            </Routes>
         </div>
-    );
+    )
 }
 
-export default App;
+export default App
