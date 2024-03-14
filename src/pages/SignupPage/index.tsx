@@ -1,25 +1,27 @@
-import React from 'react';
-import {SignupFormValues} from "../../components/Signup/types";
-import Signup from "../../components/Signup";
-import SignupService from "../../services/SignupServices";
-import {useNavigate} from "react-router-dom";
+import React from 'react'
+import { SignupFormValues } from '../../components/Signup/types'
+import Signup from '../../components/Signup'
+import SignupService from '../../services/SignupServices'
+import { useNavigate } from 'react-router-dom'
+import { useToasts } from 'react-toast-notifications'
 
 const SignupPage = () => {
-    const navigate = useNavigate()
-    const handleSubmit = async (data: SignupFormValues) => {
-        const response = (await SignupService.SignupRequest(data))?.data
-        console.log('response',response)
-        if (response?.token) {
-            localStorage.setItem('token', response?.token)
-            navigate('/auth/login')
-        }
-    };
+  const navigate = useNavigate()
+  const { addToast } = useToasts()
 
-    return (
-        <div>
-            <Signup onSubmit={handleSubmit} />
-        </div>
-    );
-};
+  const handleSubmit = async (data: SignupFormValues) => {
+    try {
+      const response = (await SignupService.SignupRequest(data))?.data
+      if (response?.token) {
+        localStorage.setItem('token', response?.token)
+        navigate('/auth/login')
+      }
+    } catch (error: any) {
+      addToast(error?.response?.data?.message, { appearance: 'error' })
+    }
+  }
 
-export default SignupPage;
+  return <Signup onSubmit={handleSubmit} />
+}
+
+export default SignupPage
